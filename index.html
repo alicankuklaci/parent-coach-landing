@@ -865,7 +865,7 @@ function syncSelectOptions(lang) {
       var opts = Array.from(sel.options);
       var match = opts.find(function(o) { return !o.hidden && o.value === curVal; })
                || opts.find(function(o) { return !o.hidden; });
-      if (match) sel.value = match.value;
+      if (match) match.selected = true; // sel.value picks first DOM match (may be hidden); .selected targets the element directly
     }
   });
 }
