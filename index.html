@@ -657,7 +657,7 @@ details.faq-item .faq-body {
         <label for="age" data-lang="en">Child's age range</label>
         <select id="age" name="age">
           <option value="expecting" data-lang="tr">Hamile / yakında olacağım</option>
-          <option value="expecting" data-lang="en">Expecting</option>
+          <option value="expecting" data-lang="en">Expecting / due soon</option>
           <option value="0-6m">0–6 <span data-lang="tr">ay</span><span data-lang="en">mo</span></option>
           <option value="6-12m">6–12 <span data-lang="tr">ay</span><span data-lang="en">mo</span></option>
           <option value="1-2y">1–2 <span data-lang="tr">yaş</span><span data-lang="en">yr</span></option>
@@ -670,10 +670,11 @@ details.faq-item .faq-body {
         <label for="country" data-lang="tr">Ülke</label>
         <label for="country" data-lang="en">Country</label>
         <select id="country" name="country">
-          <option value="TR">Türkiye</option>
-          <option value="DE">Deutschland</option>
-          <option value="AT">Österreich</option>
-          <option value="NL">Nederland</option>
+          <option value="TR" data-lang="tr">Türkiye</option>
+          <option value="TR" data-lang="en">Turkey</option>
+          <option value="DE">Deutschland / Germany</option>
+          <option value="AT">Österreich / Austria</option>
+          <option value="NL">Nederland / Netherlands</option>
           <option value="US">United States</option>
           <option value="other" data-lang="tr">Diğer</option>
           <option value="other" data-lang="en">Other</option>
@@ -852,17 +853,20 @@ function setLang(lang) {
 }
 
 function syncSelectOptions(lang) {
-  // Age band: "expecting" has two options (one per lang) — show only active
-  const ageSelect = document.getElementById('age');
-  const expectingOpts = ageSelect.querySelectorAll('[data-lang]');
-  expectingOpts.forEach(opt => {
-    opt.hidden = opt.getAttribute('data-lang') !== lang;
-  });
-  // Country: "Other/Diğer" same treatment
-  const countrySelect = document.getElementById('country');
-  const otherOpts = countrySelect.querySelectorAll('[data-lang]');
-  otherOpts.forEach(opt => {
-    opt.hidden = opt.getAttribute('data-lang') !== lang;
+  // For each select: hide wrong-lang options, then fix selected if it became hidden
+  ['age', 'country'].forEach(function(id) {
+    var sel = document.getElementById(id);
+    var curVal = sel.value;
+    sel.querySelectorAll('[data-lang]').forEach(function(opt) {
+      opt.hidden = opt.getAttribute('data-lang') !== lang;
+    });
+    // If the now-selected option is hidden, re-select same value in new lang; else first visible
+    if (sel.options[sel.selectedIndex] && sel.options[sel.selectedIndex].hidden) {
+      var opts = Array.from(sel.options);
+      var match = opts.find(function(o) { return !o.hidden && o.value === curVal; })
+               || opts.find(function(o) { return !o.hidden; });
+      if (match) sel.value = match.value;
+    }
   });
 }
 
