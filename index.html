@@ -416,7 +416,9 @@ details.faq-item .faq-body {
 .footer .legal-note { font-size: 10px; color: var(--text-muted); margin-top: 8px; line-height: 15px; }
 
 /* ── i18n: hide EN content by default ───────────────────────────────── */
-[data-lang="en"] { display: none; }
+/* [data-lang="en"] initial hide removed — JS setLang() always runs on init
+   and sets inline display:none on inactive-lang elements. Relying on CSS
+   here caused cascade to re-hide EN elements when JS cleared inline styles. */
 
 /* ── Responsive ──────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
