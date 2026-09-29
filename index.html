@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fidan — "Bu normal mi?" sorusunun kişisel cevabı</title>
+<meta name="description" content="Çocuğunun gelişim sorularına resmi izlem protokollerine dayanan kişisel cevaplar + haftalık ekransız etkinlik planı. Erken erişim listesine katıl.">
+<!-- OG TR -->
+<meta property="og:title" content="Fidan — &quot;Bu normal mi?&quot; sorusunun kişisel cevabı">
+<meta property="og:description" content="Çocuğunun gelişim sorularına resmi izlem protokollerine dayanan kişisel cevaplar + haftalık ekransız etkinlik planı. Erken erişim listesine katıl.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Design tokens (Pam / brand-direction.md) ────────────────────────── */
+:root {
+  --brand-primary:       #3E7C74;
+  --brand-primary-light: #6FA89D;
+  --brand-accent:        #E2895A;
+  --brand-accent-light:  #F3C9A8;
+  --bg-paper:            #FBF7F1;
+  --bg-card:             #FFFFFF;
+  --border-soft:         #E4DCC9;
+  --text-ink:            #24312E;
+  --text-muted:          #5C6B66;
+  --state-success:       #4F9D6E;
+  --state-error:         #D64545;
+}
+
+/* ── Reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  background: var(--bg-paper);
+  color: var(--text-ink);
+  line-height: 1.5;
+}
+a { color: var(--brand-primary); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────── */
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+section { padding: 0 24px 40px; }
+section:last-of-type { padding-bottom: 0; }
+
+/* ── Typography ──────────────────────────────────────────────────────── */
+.display { font-family: 'Nunito', 'Inter', sans-serif; font-weight: 800; }
+.section-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  height: 56px;
+}
+.brand { display: flex; align-items: center; gap: 8px; }
+.badge-mark {
+  width: 28px; height: 28px;
+  border-radius: 999px;
+  background: var(--brand-primary);
+  position: relative;
+  flex-shrink: 0;
+}
+.badge-mark::after {
+  content: "";
+  position: absolute;
+  left: 6px; top: 14px;
+  width: 14px; height: 8px;
+  border: 2px solid #fff;
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+}
+.badge-mark::before {
+  content: "";
+  position: absolute;
+  left: 11px; top: 6px;
+  width: 6px; height: 6px;
+  background: #fff;
+  border-radius: 999px;
+}
+.brand-name {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+}
+.lang-toggle {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  padding: 2px;
+}
+.lang-toggle button {
+  border: none;
+  background: transparent;
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  min-height: 32px;
+}
+.lang-toggle button.active {
+  background: var(--brand-primary);
+  color: #fff;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────── */
+.hero {
+  padding-top: 8px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 26px;
+  line-height: 32px;
+  margin-bottom: 12px;
+}
+.hero p.sub {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  padding: 0 4px;
+}
+.cta-primary {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  border-radius: 14px;
+  background: var(--brand-accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  font-family: inherit;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.trust-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.chip {
+  background: var(--brand-accent-light);
+  color: #5C3A22;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ── Differentiators ─────────────────────────────────────────────────── */
+.diff-list { display: flex; flex-direction: column; gap: 12px; }
+.diff-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 20px;
+  padding: 16px;
+}
+.diff-icon {
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  background: var(--brand-primary-light);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+.diff-text h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.diff-text p  { font-size: 13px; line-height: 18px; color: var(--text-muted); }
+
+/* ── Steps ───────────────────────────────────────────────────────────── */
+.steps { display: flex; flex-direction: column; gap: 16px; }
+.step { display: flex; gap: 12px; align-items: flex-start; }
+.step-num {
+  width: 28px; height: 28px;
+  border-radius: 999px;
+  background: var(--brand-accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step h3 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.step p   { font-size: 13px; line-height: 18px; color: var(--text-muted); }
+
+/* ── Trust / Disclaimer strip ────────────────────────────────────────── */
+.disclaimer {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+.disclaimer .ico { font-size: 16px; flex-shrink: 0; }
+.disclaimer p { font-size: 12px; line-height: 17px; color: var(--text-muted); }
+
+/* ── FAQ accordion ────────────────────────────────────────────────────── */
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+details.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  overflow: hidden;
+}
+details.faq-item summary {
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+details.faq-item summary::-webkit-details-marker { display: none; }
+details.faq-item summary::after {
+  content: "+";
+  font-size: 18px;
+  color: var(--brand-primary);
+  flex-shrink: 0;
+}
+details.faq-item[open] summary::after { content: "−"; }
+details.faq-item .faq-body {
+  padding: 0 16px 14px;
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--text-muted);
+}
+
+/* ── Pricing ─────────────────────────────────────────────────────────── */
+.price-card {
+  background: var(--bg-card);
+  border: 2px solid var(--brand-primary);
+  border-radius: 20px;
+  padding: 24px 20px;
+  text-align: center;
+}
+.price-badge {
+  display: inline-block;
+  background: var(--brand-accent-light);
+  color: #5C3A22;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.price-main { margin-bottom: 12px; }
+.price-amount {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  color: var(--brand-primary);
+  line-height: 1;
+}
+.price-period {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.price-annual {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.price-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 17px;
+}
+.cta-secondary {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 14px;
+  background: var(--brand-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ── Waitlist form ───────────────────────────────────────────────────── */
+.form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 20px;
+  padding: 24px 20px;
+}
+.field { margin-bottom: 16px; }
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.field input, .field select {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-paper);
+  padding: 0 12px;
+  font-size: 14px;
+  color: var(--text-ink);
+  font-family: inherit;
+}
+.field input.err { border-color: var(--state-error); }
+.field-error { font-size: 11px; color: var(--state-error); margin-top: 4px; display: none; }
+.field-error.show { display: block; }
+.consent {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 17px;
+}
+.consent input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; min-width: 16px; min-height: 16px; }
+.consent a { color: var(--brand-primary); font-weight: 600; }
+.form-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 14px;
+}
+.submit-btn {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 14px;
+  background: var(--brand-accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+.submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.inline-msg {
+  margin-top: 14px;
+  font-size: 13px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  display: none;
+  line-height: 18px;
+}
+.inline-msg.success {
+  background: rgba(79,157,110,0.12);
+  border: 1px solid var(--state-success);
+  color: #2E5C42;
+}
+.inline-msg.error {
+  background: rgba(214,69,69,0.08);
+  border: 1px solid var(--state-error);
+  color: #7A1E1E;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────── */
+.footer {
+  padding: 20px 24px 32px;
+  text-align: center;
+  border-top: 1px solid var(--border-soft);
+  margin-top: 40px;
+}
+.footer .flinks {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.footer .flinks a { color: var(--brand-primary); font-weight: 600; text-decoration: none; }
+.footer .flinks span { color: var(--border-soft); margin: 0 6px; }
+.footer .copyright { font-size: 11px; color: var(--text-muted); line-height: 16px; }
+.footer .legal-note { font-size: 10px; color: var(--text-muted); margin-top: 8px; line-height: 15px; }
+
+/* ── i18n: hide EN content by default ───────────────────────────────── */
+[data-lang="en"] { display: none; }
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .page { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Header ─────────────────────────────────────────────────────── -->
+  <div class="header">
+    <div class="brand">
+      <div class="badge-mark" aria-hidden="true"></div>
+      <span class="brand-name js-appname">Fidan</span>
+    </div>
+    <div class="lang-toggle" role="group" aria-label="Language / Dil">
+      <button data-lang-btn="tr" aria-pressed="true">TR</button>
+      <button data-lang-btn="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+
+  <!-- ── Hero ───────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <!-- TR -->
+    <h1 class="display" data-lang="tr">"Bu normal mi?" — Artık bu sorunun çocuğunu tanıyan bir cevabı var.</h1>
+    <p class="sub" data-lang="tr">
+      Fidan, T.C. Sağlık Bakanlığı'nın kamuya açık gelişim izlem protokollerini temel alan
+      yapay zekâ destekli bir ebeveyn koçu. Sorunu yaz; çocuğunun yaşına ve senin anlattıklarına
+      göre kişisel, anlaşılır bir cevap ve haftalık ekransız etkinlik planı al. Tanı koymaz —
+      gerektiğinde seni çocuk hekimine yönlendirir.
+    </p>
+    <!-- EN -->
+    <h1 class="display" data-lang="en">The question every parent googles at 3&nbsp;a.m. — answered for <em>your</em> child.</h1>
+    <p class="sub" data-lang="en">
+      Fidan is an AI-powered parenting coach grounded in published national child-development
+      monitoring protocols — the structured milestones pediatric systems use, not internet folklore.
+      Ask anything; get a personal, sourced answer for your child's age and history, plus a weekly
+      screen-free activity plan. Fidan never diagnoses — when something needs a professional, it
+      says so and points you to one.
+    </p>
+    <button class="cta-primary" onclick="scrollToWaitlist()">
+      <span data-lang="tr">Erken erişim listesine katıl</span>
+      <span data-lang="en">Join the early-access list</span>
+    </button>
+    <div class="trust-chips">
+      <span class="chip" data-lang="tr">Resmi kaynaklara dayanır</span>
+      <span class="chip" data-lang="en">Grounded in official guidance</span>
+      <span class="chip" data-lang="tr">Tanı koymaz, yönlendirir</span>
+      <span class="chip" data-lang="en">Guides, doesn't diagnose</span>
+      <span class="chip" data-lang="tr">Verin sizde kalır</span>
+      <span class="chip" data-lang="en">Your data stays yours</span>
+    </div>
+  </section>
+
+  <!-- ── Differentiators ────────────────────────────────────────────── -->
+  <section>
+    <div class="section-title" data-lang="tr">Neden bir sohbet uygulaması değil</div>
+    <div class="section-title" data-lang="en">Why not just another chatbot</div>
+    <div class="diff-list">
+      <div class="diff-card">
+        <div class="diff-icon" aria-hidden="true">✓</div>
+        <div class="diff-text">
+          <h3 data-lang="tr">Çocuğuna özel cevap</h3>
+          <h3 data-lang="en">An answer for your child, not "a child"</h3>
+          <p data-lang="tr">Arama motoru herkese aynı 40 sekmeyi açar; genel sohbet botları çocuğunu tanımaz. Fidan, çocuğunun yaşını, geçmiş sorularını ve gelişim günlüğünü bilerek cevap verir — ve cevabını dayandığı resmi kaynakla birlikte gösterir.</p>
+          <p data-lang="en">Search engines give everyone the same forty tabs; generic chatbots start from zero every time. Fidan answers knowing your child's age, your past questions, and their development journal — and shows the source behind every answer.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon" aria-hidden="true">✓</div>
+        <div class="diff-text">
+          <h3 data-lang="tr">Ekran çocuğuna değil, sana</h3>
+          <h3 data-lang="en">The screen is for you, not your kid</h3>
+          <p data-lang="tr">Her hafta, çocuğunun yaşına ve o haftaki gözlemlerine göre hazırlanan ekransız etkinlik planı: evdeki malzemelerle, 10–15 dakikalık, birlikte yapılan oyunlar. Uygulama senin cebinde durur; çocuğunun eline ekran vermez.</p>
+          <p data-lang="en">Every week you get a screen-free activity plan matched to your child's age and your latest observations: 10–15 minute games with things you already have at home. The app stays in your pocket — it never asks for your child's eyes.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon" aria-hidden="true">✓</div>
+        <div class="diff-text">
+          <h3 data-lang="tr">Soran unutur, Fidan hatırlar</h3>
+          <h3 data-lang="en">You forget. Fidan remembers.</h3>
+          <p data-lang="tr">Gözlemlerin gelişim günlüğünde birikir: ilk adım, ilk kelime, o haftaki uyku düzeni. Haftalık özet, neyin değiştiğini gösterir; bir sonraki cevap ve plan bu birikime göre kişiselleşir.</p>
+          <p data-lang="en">First steps, first words, this week's sleep — your observations build a development journal. A weekly summary shows what changed, and every next answer and plan gets sharper because of it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How it works ───────────────────────────────────────────────── -->
+  <section>
+    <div class="section-title" data-lang="tr">Nasıl çalışır</div>
+    <div class="section-title" data-lang="en">How it works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" aria-hidden="true">1</div>
+        <div>
+          <h3 data-lang="tr">Profili oluştur (2 dakika)</h3>
+          <h3 data-lang="en">Set up the profile (2 minutes)</h3>
+          <p data-lang="tr">Çocuğunun yaşını gir, birkaç soruyu yanıtla.</p>
+          <p data-lang="en">Enter your child's age and answer a few questions.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" aria-hidden="true">2</div>
+        <div>
+          <h3 data-lang="tr">Sor ya da anlat</h3>
+          <h3 data-lang="en">Ask, or just tell</h3>
+          <p data-lang="tr">"18 aylık, hâlâ tek kelime konuşuyor — bu normal mi?" gibi bir soru yaz veya gününü anlat.</p>
+          <p data-lang="en">Type a question like "18 months and still only single words — is this normal?" or describe your day.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" aria-hidden="true">3</div>
+        <div>
+          <h3 data-lang="tr">Cevabını ve planını al</h3>
+          <h3 data-lang="en">Get your answer and your plan</h3>
+          <p data-lang="tr">Kaynağı gösterilen kişisel bir cevap + bu haftanın ekransız etkinlik planı. Günlüğün biriktikçe her ikisi de isabetlileşir.</p>
+          <p data-lang="en">A personal, source-backed answer plus this week's screen-free plan. The longer your journal, the more personal both become.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Trust / Disclaimer ─────────────────────────────────────────── -->
+  <section style="padding-bottom: 0;">
+    <div class="disclaimer">
+      <span class="ico" aria-hidden="true">ℹ️</span>
+      <p data-lang="tr">Fidan tıbbi tavsiye vermez, tanı koymaz, tedavi önermez. Çocuğunuzla ilgili bir endişeniz varsa lütfen çocuk hekiminize danışın. Acil durumda 112'yi arayın.</p>
+      <p data-lang="en">Fidan is not medical advice and does not diagnose or prescribe. If you have concerns about your child, please consult your pediatrician. In an emergency, call your local emergency number.</p>
+    </div>
+  </section>
+
+  <!-- ── Trust block ─────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-title" data-lang="tr">Güven ve gizlilik</div>
+    <div class="section-title" data-lang="en">Trust &amp; privacy</div>
+    <div class="diff-list">
+      <div class="diff-card">
+        <div class="diff-icon" aria-hidden="true">📋</div>
+        <div class="diff-text">
+          <h3 data-lang="tr">Resmi, kamuya açık kaynaklar</h3>
+          <h3 data-lang="en">Official, public sources</h3>
+          <p data-lang="tr">Cevaplar T.C. Sağlık Bakanlığı'nın yayımladığı bebek-çocuk izlem protokollerini temel alır, dayandığı kaynağı gösterir. Fidan'ın Sağlık Bakanlığı ile bir bağlantısı yoktur.</p>
+          <p data-lang="en">Answers are grounded in publicly available child-development monitoring protocols published by Türkiye's Ministry of Health; every answer shows its source. Fidan is independent and not affiliated with any government body. Also fully fluent in Turkish — ask in either language.</p>
+        </div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon" aria-hidden="true">🔒</div>
+        <div class="diff-text">
+          <h3 data-lang="tr">Verin sana ait</h3>
+          <h3 data-lang="en">Your data stays yours</h3>
+          <p data-lang="tr">KVKK ve GDPR'a uygun; verilerin şifreli saklanır, satılmaz, reklam için kullanılmaz. Hesabını ve tüm kayıtları istediğin an kalıcı olarak silebilirsin.</p>
+          <p data-lang="en">GDPR-compliant; encrypted storage, never sold, never used for ads. Delete your account and every record permanently, anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pricing (A/B) ──────────────────────────────────────────────── -->
+  <section id="pricing">
+    <div class="section-title" data-lang="tr">Erken kayıt fiyatı</div>
+    <div class="section-title" data-lang="en">Early-access pricing</div>
+
+    <!-- Variant A -->
+    <div class="price-card js-price-card" id="price-a">
+      <div class="price-badge" data-lang="tr">Lansmanda 7 gün ücretsiz deneme</div>
+      <div class="price-badge" data-lang="en">7-day free trial at launch</div>
+      <div class="price-main">
+        <div class="price-amount" data-lang="tr">₺199</div>
+        <div class="price-amount" data-lang="en">$6.99</div>
+        <div class="price-period" data-lang="tr">/ ay</div>
+        <div class="price-period" data-lang="en">/ month</div>
+      </div>
+      <div class="price-annual" data-lang="tr">veya yıllık <strong>₺1.399</strong> — 5 aydan fazlası hediye</div>
+      <div class="price-annual" data-lang="en">or <strong>$49.99</strong>/year — more than 5 months free</div>
+      <div class="price-note" data-lang="tr">İstediğin an, tek dokunuşla iptal. Erken kayıt olanların lansman fiyatı sabitlenir — sonradan zam işlemez.</div>
+      <div class="price-note" data-lang="en">Cancel anytime in one tap. Join the list and today's price is locked in for you — it will never go up on you.</div>
+      <button class="cta-secondary" onclick="onPriceClick()" aria-label="Devam Et / Continue">
+        <span data-lang="tr">Devam Et</span>
+        <span data-lang="en">Continue</span>
+      </button>
+    </div>
+
+    <!-- Variant B (hidden until assigned) -->
+    <div class="price-card js-price-card" id="price-b" style="display:none;">
+      <div class="price-badge" data-lang="tr">Lansmanda 7 gün ücretsiz deneme</div>
+      <div class="price-badge" data-lang="en">7-day free trial at launch</div>
+      <div class="price-main">
+        <div class="price-amount" data-lang="tr">₺279</div>
+        <div class="price-amount" data-lang="en">$9.99</div>
+        <div class="price-period" data-lang="tr">/ ay</div>
+        <div class="price-period" data-lang="en">/ month</div>
+      </div>
+      <div class="price-annual" data-lang="tr">veya yıllık <strong>₺1.999</strong> — 5 aydan fazlası hediye</div>
+      <div class="price-annual" data-lang="en">or <strong>$69.99</strong>/year — more than 5 months free</div>
+      <div class="price-note" data-lang="tr">İstediğin an, tek dokunuşla iptal. Erken kayıt olanların lansman fiyatı sabitlenir — sonradan zam işlemez.</div>
+      <div class="price-note" data-lang="en">Cancel anytime in one tap. Join the list and today's price is locked in for you — it will never go up on you.</div>
+      <button class="cta-secondary" onclick="onPriceClick()" aria-label="Devam Et / Continue">
+        <span data-lang="tr">Devam Et</span>
+        <span data-lang="en">Continue</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── Waitlist form ──────────────────────────────────────────────── -->
+  <section id="waitlist">
+    <div class="section-title" data-lang="tr">Erken erişim listesine katıl</div>
+    <div class="section-title" data-lang="en">Join the early-access list</div>
+    <div class="form-card">
+      <div class="field">
+        <label for="email" data-lang="tr">E-posta</label>
+        <label for="email" data-lang="en">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email"
+               placeholder="ornek@eposta.com" inputmode="email">
+        <div class="field-error" id="email-err" role="alert">
+          <span data-lang="tr">Geçerli bir e-posta adresi girin.</span>
+          <span data-lang="en">Please enter a valid email address.</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="age" data-lang="tr">Çocuğunun yaş aralığı</label>
+        <label for="age" data-lang="en">Child's age range</label>
+        <select id="age" name="age">
+          <option value="expecting" data-lang="tr">Hamile / yakında olacağım</option>
+          <option value="expecting" data-lang="en">Expecting</option>
+          <option value="0-6m">0–6 <span data-lang="tr">ay</span><span data-lang="en">mo</span></option>
+          <option value="6-12m">6–12 <span data-lang="tr">ay</span><span data-lang="en">mo</span></option>
+          <option value="1-2y">1–2 <span data-lang="tr">yaş</span><span data-lang="en">yr</span></option>
+          <option value="2-4y">2–4 <span data-lang="tr">yaş</span><span data-lang="en">yr</span></option>
+          <option value="4-6y">4–6 <span data-lang="tr">yaş</span><span data-lang="en">yr</span></option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="country" data-lang="tr">Ülke</label>
+        <label for="country" data-lang="en">Country</label>
+        <select id="country" name="country">
+          <option value="TR">Türkiye</option>
+          <option value="DE">Deutschland</option>
+          <option value="AT">Österreich</option>
+          <option value="NL">Nederland</option>
+          <option value="US">United States</option>
+          <option value="other" data-lang="tr">Diğer</option>
+          <option value="other" data-lang="en">Other</option>
+        </select>
+      </div>
+
+      <label class="consent">
+        <input type="checkbox" id="consent" name="consent" required>
+        <span>
+          <span data-lang="tr">E-postamı bekleme listesi ve ürün güncellemeleri için kullanmasına izin veriyorum.</span>
+          <span data-lang="en">I agree to my email being used for the waitlist and product updates.</span>
+          <a href="privacy.html" target="_blank" rel="noopener">
+            <span data-lang="tr"> Gizlilik Politikası</span>
+            <span data-lang="en"> Privacy Policy</span>
+          </a>
+        </span>
+      </label>
+
+      <p class="form-note">
+        <span data-lang="tr">Sadece lansman haberi ve erken erişim daveti için. Spam yok, e-postan paylaşılmaz.</span>
+        <span data-lang="en">Launch news and your early-access invite only. No spam, and your email is never shared.</span>
+      </p>
+
+      <button class="submit-btn" id="submit-btn" type="button" disabled onclick="onSubmit()">
+        <span data-lang="tr">Katıl</span>
+        <span data-lang="en">Join</span>
+      </button>
+
+      <div class="inline-msg" id="form-msg" role="alert">
+        <span id="form-msg-tr" data-lang="tr"></span>
+        <span id="form-msg-en" data-lang="en"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-title" data-lang="tr">Sıkça Sorulan Sorular</div>
+    <div class="section-title" data-lang="en">Frequently Asked Questions</div>
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary>
+          <span data-lang="tr">Fidan tıbbi tavsiye veriyor mu?</span>
+          <span data-lang="en">Is Fidan medical advice?</span>
+        </summary>
+        <div class="faq-body">
+          <p data-lang="tr">Hayır. Fidan bir bilgilendirme ve takip aracıdır; tanı koymaz, tedavi önermez. Cevaplar resmi izlem protokollerindeki genel çerçeveye dayanır ve gerektiğinde seni çocuk hekimine yönlendirir. Acil durumda 112'yi arayın.</p>
+          <p data-lang="en">No. Fidan is an information and tracking tool; it doesn't diagnose or prescribe. Answers reflect the general framework of published monitoring protocols, and it will point you to a pediatrician whenever that's the right move. In an emergency, call your local emergency number.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span data-lang="tr">Cevaplar neye dayanıyor?</span>
+          <span data-lang="en">What are answers based on?</span>
+        </summary>
+        <div class="faq-body">
+          <p data-lang="tr">T.C. Sağlık Bakanlığı'nın kamuya açık bebek-çocuk izlem protokolleri ve gelişimi izleme rehberi temel alınır; her cevapta dayandığı kaynak gösterilir. Fidan'ın Bakanlık ile bağlantısı yoktur.</p>
+          <p data-lang="en">Publicly available child-development monitoring protocols published by Türkiye's Ministry of Health; every answer shows its source. Fidan is independent and has no government affiliation.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span data-lang="tr">Genel bir sohbet botundan farkı ne?</span>
+          <span data-lang="en">How is this different from a generic chatbot?</span>
+        </summary>
+        <div class="faq-body">
+          <p data-lang="tr">Üç şey: çocuğunun profili ve geçmişiyle cevap verir (genel botlar her seferinde sıfırdan başlar), resmi Türkçe kaynaklara dayanır ve kaynağını gösterir, cevapla yetinmez — haftalık ekransız plan ve gelişim günlüğüyle takibi sürdürür.</p>
+          <p data-lang="en">Three ways: it answers with your child's profile and history (chatbots start from zero), it's anchored to official published protocols and shows its sources, and it doesn't stop at an answer — it follows through with a weekly screen-free plan and a development journal.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span data-lang="tr">Verilerimiz güvende mi?</span>
+          <span data-lang="en">Is our data safe?</span>
+        </summary>
+        <div class="faq-body">
+          <p data-lang="tr">Evet. Hesap ebeveyne aittir; veriler şifreli saklanır, üçüncü taraflara satılmaz, reklam gösterilmez. KVKK/GDPR kapsamındaki haklarınla hesabını ve tüm verini istediğin an kalıcı olarak silebilirsin.</p>
+          <p data-lang="en">Yes. The account belongs to the parent; data is encrypted, never sold, and there are no ads. Under GDPR you can export or permanently delete your account and all records at any time.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span data-lang="tr">Hangi yaş aralığı için?</span>
+          <span data-lang="en">What ages?</span>
+        </summary>
+        <div class="faq-body">
+          <p data-lang="tr">Lansmanda 0–6 yaş (izlem protokollerinin en yoğun dönemi). Sonraki yaş bantları yol haritasında.</p>
+          <p data-lang="en">Ages 0–6 at launch — the most milestone-dense years. Older age bands are on the roadmap.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span data-lang="tr">Ne zaman çıkıyor, listeye kayıt ne kazandırıyor?</span>
+          <span data-lang="en">When does it launch, and what does the list get me?</span>
+        </summary>
+        <div class="faq-body">
+          <p data-lang="tr">Hedef önümüzdeki aylar; listedekiler erken erişim daveti alır ve bugünkü fiyat kendileri için sabitlenir. Lansmanda 7 gün ücretsiz deneme herkese açık.</p>
+          <p data-lang="en">Target is the coming months; list members get the early-access invite and today's price locked in. Everyone gets a 7-day free trial at launch.</p>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────── -->
+  <div class="footer">
+    <div class="flinks">
+      <a href="privacy.html" data-lang="tr">Gizlilik Politikası</a>
+      <a href="privacy.html" data-lang="en">Privacy Policy</a>
+      <span aria-hidden="true">·</span>
+      <a href="mailto:alican.kuklaci@gmail.com">
+        <span data-lang="tr">İletişim</span>
+        <span data-lang="en">Contact</span>
+      </a>
+    </div>
+    <div class="copyright">© 2026 Fidan</div>
+    <div class="legal-note" data-lang="tr">
+      Fidan bir sağlık hizmeti değildir; tanı ve tedavi yerine geçmez. Fidan'ın T.C. Sağlık
+      Bakanlığı ile bağlantısı yoktur; kamuya açık yayınlara atıf yapar.
+    </div>
+    <div class="legal-note" data-lang="en">
+      Fidan is not a healthcare service and is no substitute for diagnosis or treatment.
+      Fidan is not affiliated with any government body; it references publicly available publications.
+    </div>
+  </div>
+
+</div><!-- .page -->
+
+<script>
+// ── App name constant — change this ONE place to rename the product ──
+const APP_NAME = 'Fidan';
+
+// ── Supabase edge function URL ────────────────────────────────────────
+const API_URL = 'https://laevrozkdndxvfecjfzf.supabase.co/functions/v1/waitlist';
+
+// ── Session & A/B state ───────────────────────────────────────────────
+function getOrCreate(key, factory) {
+  try {
+    return localStorage.getItem(key) || (() => { const v = factory(); localStorage.setItem(key, v); return v; })();
+  } catch { return factory(); }
+}
+
+const SESSION_ID   = getOrCreate('pc_sid', () => crypto.randomUUID());
+const AB_VARIANT   = getOrCreate('pc_ab',  () => Math.random() < 0.5 ? 'a' : 'b');
+const AB_VIEWED_KEY = 'pc_ab_viewed_' + AB_VARIANT;
+let   abViewed     = false;
+try { abViewed = !!localStorage.getItem(AB_VIEWED_KEY); } catch {}
+
+// ── A/B: show the assigned variant's price card ───────────────────────
+document.getElementById('price-a').style.display = AB_VARIANT === 'a' ? '' : 'none';
+document.getElementById('price-b').style.display = AB_VARIANT === 'b' ? '' : 'none';
+
+// ── Language state ────────────────────────────────────────────────────
+let currentLang = 'tr';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-lang="tr"]').forEach(el => { el.style.display = lang === 'tr' ? '' : 'none'; });
+  document.querySelectorAll('[data-lang="en"]').forEach(el => { el.style.display = lang === 'en' ? '' : 'none'; });
+  document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+    const isActive = btn.getAttribute('data-lang-btn') === lang;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', String(isActive));
+  });
+  // Sync select options (show only the active language option where both exist)
+  syncSelectOptions(lang);
+}
+
+function syncSelectOptions(lang) {
+  // Age band: "expecting" has two options (one per lang) — show only active
+  const ageSelect = document.getElementById('age');
+  const expectingOpts = ageSelect.querySelectorAll('[data-lang]');
+  expectingOpts.forEach(opt => {
+    opt.hidden = opt.getAttribute('data-lang') !== lang;
+  });
+  // Country: "Other/Diğer" same treatment
+  const countrySelect = document.getElementById('country');
+  const otherOpts = countrySelect.querySelectorAll('[data-lang]');
+  otherOpts.forEach(opt => {
+    opt.hidden = opt.getAttribute('data-lang') !== lang;
+  });
+}
+
+// Lang toggle
+document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+  btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang-btn')));
+});
+
+// Check ?lang=en or ?lang=tr URL param
+(function () {
+  try {
+    const p = new URLSearchParams(window.location.search).get('lang');
+    if (p === 'en' || p === 'tr') { setLang(p); return; }
+    // Check localStorage preference
+    const saved = localStorage.getItem('pc_lang');
+    if (saved === 'en' || saved === 'tr') setLang(saved);
+  } catch {}
+})();
+
+// Save lang preference when toggled
+document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    try { localStorage.setItem('pc_lang', btn.getAttribute('data-lang-btn')); } catch {}
+  });
+});
+
+// Initial sync
+syncSelectOptions(currentLang);
+
+// ── Update all app-name placeholders ─────────────────────────────────
+document.querySelectorAll('.js-appname').forEach(el => { el.textContent = APP_NAME; });
+
+// ── Scroll helpers ────────────────────────────────────────────────────
+function scrollToWaitlist() {
+  document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' });
+}
+
+function onPriceClick() {
+  sendEvent('price_click');
+  scrollToWaitlist();
+}
+
+// ── Event logger ──────────────────────────────────────────────────────
+function sendEvent(eventName) {
+  fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'event', session_id: SESSION_ID, price_variant: AB_VARIANT, event: eventName }),
+  }).catch(() => {});
+}
+
+// Log 'view' once per variant assignment
+if (!abViewed) {
+  sendEvent('view');
+  try { localStorage.setItem(AB_VIEWED_KEY, '1'); } catch {}
+}
+
+// ── Form validation & submit ─────────────────────────────────────────
+const emailInput  = document.getElementById('email');
+const consentChk  = document.getElementById('consent');
+const submitBtn   = document.getElementById('submit-btn');
+const formMsg     = document.getElementById('form-msg');
+const emailErr    = document.getElementById('email-err');
+
+function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+
+function updateSubmitState() {
+  submitBtn.disabled = !(consentChk.checked && emailInput.value.trim());
+}
+emailInput.addEventListener('input', updateSubmitState);
+consentChk.addEventListener('change', updateSubmitState);
+
+emailInput.addEventListener('blur', () => {
+  const v = emailInput.value.trim();
+  if (v && !isValidEmail(v)) {
+    emailInput.classList.add('err');
+    emailErr.classList.add('show');
+  } else {
+    emailInput.classList.remove('err');
+    emailErr.classList.remove('show');
+  }
+});
+
+function showMsg(type, trText, enText) {
+  formMsg.className = 'inline-msg ' + type;
+  document.getElementById('form-msg-tr').textContent = trText;
+  document.getElementById('form-msg-en').textContent = enText;
+  formMsg.style.display = 'block';
+}
+
+async function onSubmit() {
+  const email = emailInput.value.trim();
+  if (!isValidEmail(email)) {
+    emailInput.classList.add('err');
+    emailErr.classList.add('show');
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.querySelector('[data-lang="tr"]').textContent = 'Kaydediliyor…';
+  submitBtn.querySelector('[data-lang="en"]').textContent = 'Joining…';
+
+  const ageBand = document.getElementById('age').value;
+  const country = document.getElementById('country').value;
+  const locale  = currentLang;
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'signup',
+        email,
+        age_band: ageBand,
+        country,
+        locale,
+        price_variant: AB_VARIANT,
+        source: 'landing',
+        session_id: SESSION_ID,
+      }),
+    });
+
+    if (res.ok) {
+      showMsg('success',
+        'Listedesin! Lansmanı ilk sen duyacaksın ve bugünkü fiyat senin için sabitlendi. Bir sorun ya da fikrin olursa doğrudan e-posta gönderebilirsin — hepsini tek tek okuyoruz.',
+        "You're on the list! You'll hear about launch first, and today's price is locked in for you. Questions or ideas? Just email us — a real person reads every one."
+      );
+      submitBtn.querySelector('[data-lang="tr"]').textContent = 'Katıldın ✓';
+      submitBtn.querySelector('[data-lang="en"]').textContent = 'You\'re in ✓';
+    } else if (res.status === 429) {
+      showMsg('error',
+        'Çok fazla deneme. Lütfen bir dakika bekleyip tekrar deneyin.',
+        'Too many attempts. Please wait a moment and try again.'
+      );
+      submitBtn.disabled = false;
+      submitBtn.querySelector('[data-lang="tr"]').textContent = 'Katıl';
+      submitBtn.querySelector('[data-lang="en"]').textContent = 'Join';
+    } else {
+      throw new Error('server');
+    }
+  } catch {
+    showMsg('error',
+      'Bir sorun oluştu. Lütfen tekrar deneyin veya alican.kuklaci@gmail.com adresine e-posta gönderin.',
+      'Something went wrong. Please try again or email alican.kuklaci@gmail.com.'
+    );
+    submitBtn.disabled = false;
+    submitBtn.querySelector('[data-lang="tr"]').textContent = 'Katıl';
+    submitBtn.querySelector('[data-lang="en"]').textContent = 'Join';
+  }
+}
+</script>
+</body>
+</html>
