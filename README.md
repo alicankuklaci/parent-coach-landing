@@ -1,16 +1,16 @@
-# Fidan — parent-coach landing
+# Metria — parent-coach landing
 
-Validation landing page for the Fidan parent-coach app.
+Validation landing page for the Metria parent-coach app.
 Hosted on GitHub Pages → **https://alicankuklaci.github.io/parent-coach-landing/**
 
 ---
 
 ## How to swap the app name
 
-The working name **Fidan** lives in ONE constant in `index.html`:
+The working name **Metria** lives in ONE constant in `index.html`:
 
 ```js
-const APP_NAME = 'Fidan';
+const APP_NAME = 'Metria';
 ```
 
 Change that string and the header/brand will update automatically via `document.querySelectorAll('.js-appname')`.
