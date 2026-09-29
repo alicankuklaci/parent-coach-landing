@@ -856,15 +856,14 @@ document.querySelectorAll('[data-lang-btn]').forEach(btn => {
   btn.addEventListener('click', () => setLang(btn.getAttribute('data-lang-btn')));
 });
 
-// Check ?lang=en or ?lang=tr URL param
+// Check ?lang=en or ?lang=tr URL param; always call setLang so inline styles
+// override CSS specificity issues (e.g. .field label beats [data-lang="en"])
 (function () {
   try {
     const p = new URLSearchParams(window.location.search).get('lang');
-    if (p === 'en' || p === 'tr') { setLang(p); return; }
-    // Check localStorage preference
     const saved = localStorage.getItem('pc_lang');
-    if (saved === 'en' || saved === 'tr') setLang(saved);
-  } catch {}
+    setLang((p === 'en' || p === 'tr') ? p : (saved === 'en' || saved === 'tr') ? saved : 'tr');
+  } catch { setLang('tr'); }
 })();
 
 // Save lang preference when toggled
